@@ -1,0 +1,44 @@
+name: Export MongoDB Collections
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up MongoDB tools
+        run: sudo apt-get install -y mongodb-clients
+
+      - name: Export MongoDB collections
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }} # Set this secret in your repository settings
+        run: |
+          mkdir -p gendercomics
+          mongoexport --uri="$MONGO_URI" --collection=comics --out=gendercomics/comics.json
+          mongoexport --uri="$MONGO_URI" --collection=keywords --out=gendercomics/keywords.json
+          mongoexport --uri="$MONGO_URI" --collection=names --out=gendercomics/names.json
+          mongoexport --uri="$MONGO_URI" --collection=persons --out=gendercomics/persons.json
+          mongoexport --uri="$MONGO_URI" --collection=predicates --out=gendercomics/predicates.json
+          mongoexport --uri="$MONGO_URI" --collection=publishers --out=gendercomics/publishers.json
+          mongoexport --uri="$MONGO_URI" --collection=roles --out=gendercomics/roles.json
+          mongoexport --uri="$MONGO_URI" --collection=texts --out=gendercomics/texts.json
+
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Commit and push changes
+        run: |
+          git add gendercomics/*.json
+          git commit -m "Export MongoDB collections as JSON files"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided by GitHub Actions

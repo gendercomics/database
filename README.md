@@ -31,7 +31,7 @@ We welcome contributions to improve the data quality and structure. If you have 
 
 ## License
 
-This project is licensed under the CC BY-ND License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the CC BY-ND License - see the [LICENSE](https://creativecommons.org/licenses/by-nd/4.0/) file for details.
 
 ## Contact
 

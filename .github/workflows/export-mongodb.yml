@@ -42,7 +42,7 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
-            git add exports/*.json
+            git add gendercomics/*.json
             git diff-index --quiet HEAD || echo "changes"
 
       - name: Commit and push changes

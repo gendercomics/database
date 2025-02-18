@@ -6,7 +6,7 @@ This repository contains JSON files exported from the MongoDB collections of the
 
 The repository is organized as follows:
 
-- `json/`: This directory contains all the JSON files exported from the MongoDB collections. Each JSON file corresponds to a specific collection from the GenderComics database.
+- `gendercomics/`: This directory contains all the JSON files exported from the MongoDB collections. Each JSON file corresponds to a specific collection from the GenderComics database.
 
 ## Usage
 

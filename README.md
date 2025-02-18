@@ -31,7 +31,7 @@ We welcome contributions to improve the data quality and structure. If you have 
 
 ## License
 
-TODO
+This project is licensed under the CC BY-ND License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 

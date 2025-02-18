@@ -39,9 +39,15 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Commit and push changes
+      - name: Check for changes
+        id: git_diff
         run: |
-          git add gendercomics/*.json
+            git add exports/*.json
+            git diff-index --quiet HEAD || echo "changes"
+
+      - name: Commit and push changes
+        if: steps.git_diff.outputs.changes == 'changes'
+        run: |
           git commit -m "Export MongoDB collections as JSON files"
           git push
         env:
